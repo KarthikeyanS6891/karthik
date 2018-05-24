@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Mapping PDF fields with XML Nodes";
+}
+
+<h2>Map Fields with Xml Nodes</h2>
+
+<style>
+    #selectablePDF .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectablePDF .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectablePDF {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+
+        #selectablePDF li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 35px;
+        }
+
+    #selectableXML .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectableXML .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectableXML {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+
+        #selectableXML li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 35px;
+        }
+
+    .selectedLi {
+        background-color: #dd4814;
+    }
+
+    .draggable {
+        background: transparent;
+    }
+
+    .droppable {
+        height: 30px;
+        width: 70% !important;
+        background: #c1c1c194;
+        margin: 5px;
+        display: inline-block;
+        border-color: #357ebd;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        list-style-type: none;
+    }
+</style>
+
+<h2>Map Fields with Xml Nodes</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-head">PDF Fields</div>
+                <div class="panel-body" style="height:475px;overflow-y:auto;">
+                    @foreach (var item in ViewBag.TextFound)
+                    {
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="draggable col-lg-10" style="cursor:pointer;border: 1px solid #ccc;border-radius:5px;">
+                                @item
+                            </div>
+                        </div>
+                        <br />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-head">XML Nodes</div>
+                <div id="frm-author" class="panel-body">
+                    <div class="tree">
+                        <ul>
+                            <li>
+                                <a>Users</a>
+                                <ul>
+                                    <li>
+                                        <a>User</a>
+                                        <ul style="cursor:default">
+                                            <li>
+                                                <div class="col-lg-3">
+                                                    <a>Employee Name</a>
+                                                </div>
+                                                <div class="col-lg-9 droppable"></div>
+                                            </li>
+                                            <li>
+                                                <div class="col-lg-3">
+                                                    <a>Family Name</a>
+                                                </div>
+                                                <div class="col-lg-9 droppable"></div>
+                                            </li>
+                                            <li>
+                                                <div class="col-lg-3">
+                                                    <a>Address 1</a>
+                                                </div>
+                                                <div class="col-lg-9 droppable"></div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('.draggable').draggable({
+            revert: "invalid",
+            stack: ".draggable",
+            helper: 'clone'
+        });
+        $('.droppable').droppable({
+            accept: ".draggable",
+            drop: function (event, ui) {
+                var droppable = $(this).addClass('col-lg-6');
+                var draggable = ui.draggable;
+                var drag = $('.droppable').has(ui.draggable).length ? draggable : draggable.clone().draggable({
+                    revert: "invalid",
+                    stack: ".draggable",
+                    helper: 'clone'
+                });
+                drag.appendTo(droppable);
+                draggable.css({
+                    float: 'left'
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,859 @@
+﻿@model XMLParsingToList.Models.Enrollment
+
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">XML Tree View</div>
+    <div id="frm-author" class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="tree">
+                @if (Model != null)
+                {
+                    <ul id="source">
+                        <li>
+                            @Html.DisplayNameFor(model => model.Source)
+                        </li>
+                    </ul>
+
+                    <ul id="case">
+                        <li>
+                            @Html.DisplayNameFor(model => model.Case)
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.ProcessCase)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.CaseNumber)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.CaseEffectiveDate)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.GESR)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.PiIsPayor)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.Situs)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.CashWithApplication)
+                                    <ul id="lvlCashWithApplication3">
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.CashWithApplication.Amount)
+                                        </li>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.CashWithApplication.CalculatedAmount)
+                                        </li>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.CashWithApplication.TransactionDate)
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.CasePlan)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.Location)
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.LocationType)
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.Address)
+                                            <ul id="lvlAddress3">
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Address.City)
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.CallCenter)
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.SignatureRequired)
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.ApplicationCount)
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayNameFor(model => model.Case.Location.Application)
+                                            <ul>
+                                                @for (var index = 0; index < Model.Case.Location.Application.People.Count(); index++)
+                                                {
+                                                    <li>
+                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.People)
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsProposedInsured)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsPolicyOwner)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsPayor)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsSecondaryContact)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsDependent)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsBeneficiary)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].IsEmployee)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].RelationshipToPI)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].RelationshipToEmployee)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Name)
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Name.FirstName)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Name.LastName)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Name.FullName)
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Address)
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Address.StreetAddress1)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Address.City)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Address.State)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Address.ZipCode)
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Gender)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].GroupNumber)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].DateOfBirth)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Age)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].SSN)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].MaritalStatus)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employer)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].CrossReference)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            @for (var question = 0; question < Model.Case.Location.Application.People[index].Questionnaire.Count(); question++)
+                                                            {
+                                                                <li>
+                                                                    @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire)
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire[question].QuestionNumber)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire[question].QuestionNumberText)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire[question].YesNo)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire[question].Remark)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Questionnaire[question].TobaccoUse)
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Results)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].ResultsEOIRequired)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].ExistingCoverage)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Results)
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee)
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.Employer)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.AnnualCompensation)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.PaySchedule)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.ContributionSchedule)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.MonthlySalary)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.EmployeeNumber)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(m => Model.Case.Location.Application.People[index].Employee.DateOfHire)
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PlanCode)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.BaseUnits)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyUnits)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.CoverageLevel)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Section125)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.ExistingCOIC2)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.IsHSA)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.IssueType)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.FaceAmount)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.RequestedFaceAmount)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.MonthlySalary)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.FormName)
+                                                                </li>
+                                                            </ul>
+
+                                                            @for (var rider = 0; rider < Model.Case.Location.Application.Policies.Policy.Rider.Count(); rider++)
+                                                            {
+                                                                <ul>
+                                                                    <li>
+
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Rider)
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Rider[rider].RiderCode)
+                                                                            </li>
+                                                                        </ul>
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Rider[rider].RiderUnits)
+                                                                            </li>
+                                                                        </ul>
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Rider[rider].RiderAgents)
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            }
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PerDeduction)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyBeneficiary)
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyBeneficiary.CrossReference)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyBeneficiary.BeneficiaryType)
+                                                                        </li>
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyBeneficiary.BeneficiaryPercent)
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.ReplaceCoverage)
+                                                                    <ul>
+                                                                        <li>
+                                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.ReplaceCoverage.BenefitAmount)
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.RecordType)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.GroupProduct)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.GroupExist)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.TerminationDate)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.OccClass)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.IsFixedAmountRequired)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.SpouseFaceAmount)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.ChildFaceAmount)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.Situs)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.EmpTakeoverAmountLimit)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.SpouseTakeoverAmountLimit)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.ChildTakeoverAmountLimit)
+                                                                </li>
+                                                            </ul>
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Policies.Policy.PolicyData)
+                                                                </li>
+                                                            </ul>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.PayDetail)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.PayDetail.DateOfFirstDeduction)
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.PayDetail.TotalPremium)
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.PayDetail.NumberOfPays)
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.DateSigned)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.EOIDateSigned)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.EnrollmentIndicator)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.PayorNumber)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.Agents)
+                                                    @for (var agent = 0; agent < Model.Case.Location.Application.Agents.Count(); agent++)
+                                                    {
+                                                        <ul>
+                                                            <li>
+                                                                Agent
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AHLAgentCode)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].Percentage)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].Capacity)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].Name)
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature)
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus)
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus.SignatureString)
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature2)
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus)
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus.SignatureString)
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul>
+                                                                    <li>
+                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignatureGroup)
+                                                                        <ul>
+                                                                            <li>
+                                                                                @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus)
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        @Html.DisplayNameFor(model => model.Case.Location.Application.Agents[agent].AgentSignature.SigPlus.SignatureString)
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    }
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.NAICForms)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature.SigPlus)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature.SigPlus.SignatureString)
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature2)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature2.SigPlus)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignature2.SigPlus.SignatureString)
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.GroupApplicantSignature)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.GroupApplicantSignature.SigPlus)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.GroupApplicantSignature.SigPlus.SignatureString)
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Employee)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Employee.SigPlus)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Employee.SigPlus.SignatureString)
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Agent)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Agent.SigPlus)
+                                                            <ul>
+                                                                <li>
+                                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.ApplicantSignatureDI5_Agent.SigPlus.SignatureString)
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.RequestedIssueDate)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.FileIssueDate)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.RecordType)
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.SupplementalData)
+                                                    <ul>
+                                                        <li>
+                                                            @Html.DisplayNameFor(model => model.Case.Location.Application.SupplementalData.SupplementalDataTagType)
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>
+                                                    @Html.DisplayNameFor(model => model.Case.Location.Application.SupplementalForm)
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.ManageGIs)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.KeyerSheets)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.QuickSheets)
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Case.CaseConfigurationData)
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+
+                    <ul id="EmployerConfiguration">
+                        <li>
+                            @Html.DisplayNameFor(model => model.EmployerConfiguration)
+
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.Address)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.BillingConfigurations)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.LocationConfigurations)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.Classes)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.ProductConfigurations)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.AgentOfRecord)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.ServicingAgent)
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.EmployerConfiguration.OtherAgents)
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                }
+
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Read/Write PDF";
+}
+<h2>Read/Write PDF</h2>
+
+<br/>
+@using (Html.BeginForm("ReadPDFfiles", "PolicyDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="upload_file">
+        <input type="file" id="fileUpload" name="fileUpload" style="float:left" /><input type="submit" value="Get User List" />
+    </div>
+}
+<br />
+<br />
+
+
+@*<label>@ViewBag.PDFValues</label>*@
+
+
+@foreach(var item in ViewBag.TextFound)
+{
+    <div>
+        <label>@item</label>
+        
+    </div>
+}

@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "GetXMLNodes";
+}
+
+<style>
+    #selectablePDF .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectablePDF .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectablePDF {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+
+        #selectablePDF li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 35px;
+        }
+
+    #selectableXML .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectableXML .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+
+    #selectableXML {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+
+        #selectableXML li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 35px;
+        }
+
+    .selectedLi {
+        background-color: #dd4814;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        list-style-type: none;
+    }
+</style>
+
+<button class="btn btn-primary btn-sm pull-right" id="ShowTree">show tree</button>
+
+<div id="formView">
+    <textarea id="textarea">
+        <Users>
+            <User>
+                <givenname>1</givenname>
+                <familyname>Patil</familyname>
+                <address1>Male</address1>
+                <housenr>5645465652</housenr>
+                <address2>Bangalore</address2>
+                <pincode>560212</pincode>
+                <city>Karnataka</city>
+                <country>India</country>
+                <Gender>Male</Gender>
+                <Height>150</Height>
+            </User>
+        </Users>
+    </textarea>
+</div>
+<div id="treeView">
+    <ul>
+        <li>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ShowTree').click(function () {
+            //$('#formView').hide();
+            $('#treeView').show();
+            var tree = $.parseXML($('#textarea').val());
+            traverse($('#treeView li'), tree.firstChild)
+            $('<b style="cursor:default"> – <\/b>').prependTo('#treeView li:has(li)').click(function () {
+                var sign = $(this).text()
+                if (sign == " – ")
+                    $(this).text(' + ').next().children().hide()
+                else
+                    $(this).text(' – ').next().children().show()
+            });
+        });
+
+
+        function traverse(node, tree) {
+            var children = $(tree).children()
+            node.append(tree.nodeName)
+            if (children.length) {
+                var ul = $("<ul>").appendTo(node)
+                children.each(function () {
+                    var li = $('<li>').appendTo(ul)
+                    traverse(li, this)
+                })
+            } else {
+                $('<ul><li style="color:red">' + '<\/li><\/ul>').appendTo(node)
+            }
+        }
+    });
+</script>
