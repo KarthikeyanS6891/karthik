@@ -1,0 +1,284 @@
+@model XMLParsingToList.Models.PolicyDetailModel
+@{
+    ViewBag.Title = "Parse XML to List";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<div class="col-lg-6">
+    <h2>Choose PDF File</h2>
+    <br />
+
+    @using (Html.BeginForm("ShowPDF", "PolicyDetails", FormMethod.Post,
+                                                         new { id = "upload", enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="fileUpload" id="fileUpload" style="display:none" />
+        @*<input type="file" name="attach" id="attach-input" style="display:none" />*@
+        <input type="button" name="attach" id="attach-pdfbutton" class="btn btn-sm btn-primary" onclick="ChoosePDFFile();" value="Upload PDF" />
+        <input type="submit" value="View PDF"  class="btn btn-sm btn-primary"/>
+
+    }
+    <br />
+
+    <div id="divFileValues"></div>
+    @*<div class="upload_file">
+        <input type="file" name="attach" id="attach-input-pdf" style="display:none" />
+        <input type="button" name="attach" id="attach-button-pdf" class="btn btn-sm btn-primary" onclick="ChooseFile1();" value="Choose File" />
+        <input type="submit" value="Show" onclick="RefereshPDF();" class="btn btn-sm btn-primary" />
+
+    </div>
+    <br />
+    @*<object data="@Url.Action("GetPDF")" type="application/pdf" id="objPdfFile" width="100%" height="550">
+            alt : <a href="data/test.pdf">test.pdf</a>
+        </object>*@
+    @*<li>@Ajax.ActionLink("Viw Temp PDF Method5", "GetPDF", new AjaxOptions { UpdateTargetId = "result" })</li>
+    @Html.Partial("_ShowPDF", @Html.DisplayFor(model => model.result));*@
+
+    <br />
+</div>
+<div class="col-lg-6">
+    <h2>Choose XML File</h2>
+    <br />
+    @using (Html.BeginForm("Upload", "PolicyDetails", FormMethod.Post, new { id = "formUpload", enctype = "multipart/form-data" }))
+    {
+        <div class="upload_file">
+            @*<input type="file" id="XMLbtnsuccess" name="fileUpload" style="float:left" />*@
+            <input type="file" name="attach" id="attach-input" style="display:none" />
+            <input type="button" name="attach" id="attach-button" class="btn btn-sm btn-primary" onclick="ChooseFile();" value="Upload XML" />
+            <input type="submit" value="Load XML Data" class="btn btn-sm btn-primary" />
+        </div>
+    }
+    <br />
+    @*<table class="table table-striped">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Gender)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Mobile)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.StreetName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StreetName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.City)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Pin)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Pin)
+            </td>
+        </tr>
+    </table>*@
+
+    <div id="divXMLNodeInTreeView" style="max-height:555px; overflow-y:scroll"></div>
+</div>
+<div class="clearfix"></div><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-primary btn-sm pull-right" id="btnContinue">Map Fields</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    table.formatHTML5 tr.selected {
+        background-color: #e92929 !important;
+        color: #fff;
+        vertical-align: middle;
+        padding: 1.5em;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("tbody tr").click(function () {
+            $('.selected').removeClass('selected');
+            $(this).addClass("selected");
+            var product = $('.p', this).html();
+            var infRate = $('.i', this).html();
+            var note = $('.n', this).html();
+            alert(product + ',' + infRate + ',' + note);
+        });
+    });
+
+    function BuildFormData(files) {
+
+        var data = new FormData();
+
+        for (var i = 0; i < files.length; i++) {
+
+            data.append(files[i].name, files[i]);
+        }
+
+        return data;
+    }
+
+    // posts the files to a given url
+    function PostData(url, data) {
+
+        $.ajax({
+            // method
+            type: 'POST',
+
+            // endpoint
+            url: url,
+
+            // next 2 lines required for using FormData with jQuery
+            contentType: false,
+            processData: false,
+
+            // FormData instance
+            data: data,
+
+            // success handler
+            success: function (result) {
+
+                alert('files uploaded successfully');
+
+                console.log(result);
+            }
+        });
+    }
+
+    // when the button is clicked..
+    function ChooseFile() {
+        $('#attach-input').click();
+    }
+
+    function ChoosePDFFile() {
+
+        $('#fileUpload').click();
+    }
+
+    // when the file picker changes..
+    function onFileChange() {
+        var files = $('#attach-input').val();
+        var data = BuildFormData(files);
+        // post the form to the action method
+        PostData('/Index/ReadPDFfiles', data);
+    };
+
+    $('#attach-input').change(function (e) {
+
+        // turn it into a form
+        var data = BuildFormData(e.target.files);
+
+        // post the form to the action method
+        PostData('/PolicyDetails/SaveFile', data);
+    });
+
+    $('#attach-input-pdf').change(function (e) {
+
+        // turn it into a form
+        var data = BuildFormData(e.target.files);
+
+        // post the form to the action method
+        PostData('/PolicyDetails/SaveFile1', data);
+    });
+
+    function RefereshPDF() {
+        PostData('/PolicyDetails/GetPDF', '');
+    }
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+$(document).ready(function() {
+
+    $('#btnContinue').on("click", function () {
+        window.location.href = '/Mapping/Index';
+    });
+
+    $('#upload').submit(function (e) {
+        e.preventDefault(); // stop the standard form submission
+
+        var $file = document.getElementById('fileUpload'),
+    $formData = new FormData();
+
+        if ($file.files.length > 0) {
+            for (var i = 0; i < $file.files.length; i++) {
+                $formData.append('file-' + i, $file.files[i]);
+            }
+        }
+
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $('#divFileValues').html(response);
+
+            },
+            error: function (xhr, error, status) {
+                console.log(error, status);
+            }
+        });
+    });
+
+    $('#formUpload').submit(function (e) {
+        e.preventDefault(); // stop the standard form submission
+
+        var $file = document.getElementById('attach-input'),
+    $formData = new FormData();
+
+        if ($file.files.length > 0) {
+            for (var i = 0; i < $file.files.length; i++) {
+                $formData.append('file-' + i, $file.files[i]);
+            }
+        }
+
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $('#divXMLNodeInTreeView').html(response);
+
+            },
+            error: function (xhr, error, status) {
+                console.log(error, status);
+            }
+        });
+    });
+});
+    </script>
+}
