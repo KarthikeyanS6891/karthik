@@ -1,6 +1,10 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
@@ -14,9 +18,32 @@ namespace XMLParsingToList.Controllers
         // GET: Mapping
         public ActionResult Index()
         {
-            List<myKey> values = objWriteFile.ReadPdfFile(@"D:\Karthikeyan Documents\Sample.pdf");
+            List<string> values = objWriteFile.ReadPdfFile(@"D:\Karthikeyan Documents\OoPdfFormExample.pdf");
 
             ViewBag.TextFound = values;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(@"D:\Karthikeyan Documents\testfile1.xml");
+            }
+            catch (XmlException e)
+            {
+                throw e;
+            }
+
+
+            foreach (XmlNode node in xmlDoc)
+            {
+                if (node.NodeType == XmlNodeType.XmlDeclaration)
+                {
+                    xmlDoc.RemoveChild(node);
+                }
+            }
+            StringWriter sw = new StringWriter();
+            XmlTextWriter xw = new XmlTextWriter(sw);
+            xmlDoc.WriteTo(xw);
+
+            ViewBag.data = sw.ToString();
 
             return View();
         }
@@ -25,6 +52,28 @@ namespace XMLParsingToList.Controllers
         {
             return View();
         }
+
+    //    public ActionResult GetHTMLVersionOfPDF()
+    //    {            
+    //        using (Stream inputStream = File.OpenRead("../../data/notification.pdf"))
+    //        {
+    //            using (FixedDocument doc = new FixedDocument(inputStream))
+    //            {
+    //                // create output file
+    //                using (TextWriter writer =
+    //new StreamWriter(File.Create("c:/out.html"), Encoding.UTF8))
+    //                {
+    //                    Page page = doc.Pages[0];
+    //                    // write returned html string to file
+    //                    writer.Write(page.ConvertToHtml(TextExtractionOptions.HtmlPage));
+    //                }
+    //            }
+    //        }
+
+    //        Process.Start("c:/out.html");
+
+    //        return View();
+    //    }
 
         //[HttpPost]
         //public ActionResult XMLUpload(HttpPostedFileBase file)
